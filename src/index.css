@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  @apply font-body text-gray-700 bg-white;
+}
+
+.gradient-text {
+  background-image: linear-gradient(90deg, #e63946, #ff7a59, #ff4d8d, #e63946);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientShift 6s ease infinite;
+}
+
+.reveal { opacity: 0; transform: translateY(36px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+
+.gcard { position: relative; }
+.gcard::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none;
+  background: linear-gradient(135deg, #e63946, #ff9a3c, #ff4d8d);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity: 0; transition: opacity .3s ease;
+}
+.gcard:hover::before { opacity: 1; }
+
+.dot-grid {
+  background-image: radial-gradient(rgba(230,57,70,.28) 1.2px, transparent 1.2px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(ellipse at 60% 40%, #000 20%, transparent 70%);
+  mask-image: radial-gradient(ellipse at 60% 40%, #000 20%, transparent 70%);
+}
+
+.shimmer { position: relative; overflow: hidden; }
+.shimmer::after {
+  content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.45), transparent);
+  transform: skewX(-20deg); animation: shimmerMove 3s ease-in-out infinite;
+}
+@keyframes shimmerMove { 0% { left: -60%; } 60%, 100% { left: 130%; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .gradient-text, .shimmer::after { animation: none; }
+}
+
+@keyframes gradientShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+.tilt { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .2s ease-out, box-shadow .3s; transform-style: preserve-3d; }
+.tilt::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(230,57,70,.16), transparent 65%);
+}
+.tilt:hover::after { opacity: 1; }
+
+.glow-border { padding: 1.5px; border-radius: 1rem; background: linear-gradient(135deg, #e63946, #ff9a3c, #ff4d8d, #e63946); background-size: 300% 300%; animation: gradientShift 5s ease infinite; }
+@keyframes slideBar { 0% { transform: translateX(-100%); } 100% { transform: translateX(250%); } }
+.animate-slide-bar { animation: slideBar 1.8s linear infinite; }
+
+@keyframes dashMove { to { stroke-dashoffset: -32; } }
+.animate-dash { animation: dashMove 1.4s linear infinite; }
+@keyframes eq { 0%, 100% { height: 18%; } 50% { height: 100%; } }
+.eq-bar { height: 18%; animation: eq 1s ease-in-out infinite; }
+@keyframes rise { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(-80px); opacity: 0; } }
+.animate-rise { animation: rise 3.2s ease-in infinite; }
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* Global sleek scrollbar (removes Windows 95 style ugly arrows and wide tracks) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.35);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.6);
+}
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}

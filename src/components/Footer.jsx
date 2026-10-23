@@ -9,7 +9,9 @@ export default function Footer() {
           <span>© 2026 Md Shahid Jamal. All rights reserved.</span>
         </div>
 
-        <p className="text-gray-500 dark:text-gray-400">❤ Built with passion and lots of chai ☕</p>
+        <p className="text-gray-500 dark:text-gray-400">
+          ❤ Built with passion and lots of Coffee ☕
+        </p>
       </div>
     </footer>
   );
